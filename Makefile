@@ -32,6 +32,7 @@ shell:
 		-e HOST_GID=`id -g` \
 		-e HOST_UID=`id -u` \
 		-e HOST_USER=$(USER) \
+		-v ~/.m2:/home/$(USER)/.m2 \
 		-v $(current_path)/dev/profiles.clj:/home/$(USER)/.lein/profiles.clj \
 		-v $(current_path)/dev/zshrc:/home/$(USER)/.zshrc \
 		-v $(current_path):/project \
