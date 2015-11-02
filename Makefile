@@ -11,17 +11,27 @@ mkfile_path := $(abspath $(lastword $(MAKEFILE_LIST)))
 current_path := $(dir $(mkfile_path))
 
 # Builds the development docker file
-build:
+docker-build:
 	docker build --tag=$(TAG) ./dev
 	notify-send "$(TAG) build complete"
 
 # Clean this docker image
-clean:
+docker-clean:
 	-docker rmi $(TAG)
 
 # Clean this docker image and it's dependency
-clean-deps: clean
+docker-clean-deps: clean
 	-docker rmi java:jdk
+
+# delete the generated code, and get things at a base place
+src-clean:
+	-rm -r $(current_path)/src/*
+	-rm -r $(current_path)/test
+	-rm -r $(current_path)/resources
+	-rm $(current_path)/project.clj
+	-rm $(current_path)/README.md
+	cp $(current_path)/orig/.gitignore $(current_path)/.gitignore
+	cp $(current_path)/orig/README-parent.md $(current_path)/README.md
 
 # Start a development shell
 shell:
@@ -41,6 +51,3 @@ shell:
 # Attach a new terminal to the already running shell
 shell-attach:
 	docker exec -it -u=$(USER) $(NAME) /usr/bin/zsh
-
-debug:
-	echo 
