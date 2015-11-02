@@ -51,3 +51,14 @@ shell:
 # Attach a new terminal to the already running shell
 shell-attach:
 	docker exec -it -u=$(USER) $(NAME) /usr/bin/zsh
+
+# install dependencies, which is pretty much xpra
+install-ubuntu-dependencies:
+	codename=$(word 2, $(shell lsb_release --codename)) && \
+	echo Installing xpra debs for release: $$codename && \
+	wget -O /tmp/python-rencode.deb https://www.xpra.org/dists/$$codename/main/binary-amd64/python-rencode_1.0.3-1_amd64.deb && \
+	wget -O /tmp/xpra.deb https://www.xpra.org/dists/$$codename/main/binary-amd64/xpra_0.15.7-1_amd64.deb
+	sudo dpkg -i /tmp/python-rencode.deb
+	sudo dpkg -i /tmp/xpra.deb
+	sudo apt-get install -f
+
