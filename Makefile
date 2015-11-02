@@ -59,6 +59,6 @@ install-ubuntu-dependencies:
 	wget -O /tmp/python-rencode.deb https://www.xpra.org/dists/$$codename/main/binary-amd64/python-rencode_1.0.3-1_amd64.deb && \
 	wget -O /tmp/xpra.deb https://www.xpra.org/dists/$$codename/main/binary-amd64/xpra_0.15.7-1_amd64.deb
 	sudo dpkg -i /tmp/python-rencode.deb
-	sudo dpkg -i /tmp/xpra.deb
-	sudo apt-get install -f
+	-sudo dpkg -i /tmp/xpra.deb
+	sudo apt-get install -f -y
 
