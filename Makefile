@@ -20,10 +20,6 @@ docker-build:
 docker-clean:
 	-docker rmi $(TAG)
 
-# Clean this docker image and it's dependency
-docker-clean-deps: clean
-	-docker rmi java:jdk
-
 # delete the generated code, and get things at a base place
 src-clean:
 	-rm -r $(current_path)/src/*
@@ -65,6 +61,9 @@ chrome:
 # emacs
 emacs:
 	xpra start --ssh="ssh -p $(call getPort,22)" ssh:0.0.0.0:100 --start-child=emacs
+
+emacs-attach:
+	xpra attach --ssh="ssh -p $(call getPort,22)" ssh:0.0.0.0:100
 
 # install dependencies, which is pretty much xpra
 install-ubuntu-dependencies:
