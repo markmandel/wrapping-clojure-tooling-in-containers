@@ -5,6 +5,7 @@
 
 TAG=markmandel/wrapping-dev
 NAME=clojure-project-shell
+PORT=8080
 
 #current dir
 mkfile_path := $(abspath $(lastword $(MAKEFILE_LIST)))
@@ -27,6 +28,7 @@ docker-clean-deps: clean
 src-clean:
 	-rm -r $(current_path)/src/*
 	-rm -r $(current_path)/test
+	-rm -r $(current_path)/target
 	-rm -r $(current_path)/resources
 	-rm $(current_path)/project.clj
 	-rm $(current_path)/README.md
@@ -52,6 +54,10 @@ shell:
 shell-attach:
 	docker exec -it -u=$(USER) $(NAME) /usr/bin/zsh
 
+# open a port forwarded port from Docker in Chrome!
+chrome:
+	google-chrome http://localhost:$(word 2,$(subst :, ,$(shell docker port $(NAME) $(PORT))))
+
 # install dependencies, which is pretty much xpra
 install-ubuntu-dependencies:
 	codename=$(word 2, $(shell lsb_release --codename)) && \
@@ -61,4 +67,3 @@ install-ubuntu-dependencies:
 	sudo dpkg -i /tmp/python-rencode.deb
 	-sudo dpkg -i /tmp/xpra.deb
 	sudo apt-get install -f -y
-
