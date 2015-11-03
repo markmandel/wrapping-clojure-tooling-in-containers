@@ -54,9 +54,13 @@ shell:
 shell-attach:
 	docker exec -it -u=$(USER) $(NAME) /usr/bin/zsh
 
+shell-mount-jvm:
+	mkdir -p /tmp/$(NAME)/jvm
+	sshfs $(USER)@0.0.0.0:/usr/lib/jvm /tmp/$(NAME)/jvm -p $(call getPort,22) -o follow_symlinks
+
 # open a port forwarded port from Docker in Chrome!
 chrome:
-	google-chrome http://localhost:$(word 2,$(subst :, ,$(shell docker port $(NAME) $(PORT))))
+	google-chrome http://localhost:$(call getPort,$(PORT))
 
 # install dependencies, which is pretty much xpra
 install-ubuntu-dependencies:
@@ -67,3 +71,9 @@ install-ubuntu-dependencies:
 	sudo dpkg -i /tmp/python-rencode.deb
 	-sudo dpkg -i /tmp/xpra.deb
 	sudo apt-get install -f -y
+
+
+# Functions
+
+# get the mapped docker host port
+getPort = $(word 2,$(subst :, ,$(shell docker port $(NAME) $(1))))
