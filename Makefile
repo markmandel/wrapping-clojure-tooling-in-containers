@@ -62,6 +62,10 @@ shell-mount-jvm:
 chrome:
 	google-chrome http://localhost:$(call getPort,$(PORT))
 
+# emacs
+emacs:
+	xpra start --ssh="ssh -p $(call getPort,22)" ssh:0.0.0.0:100 --start-child=emacs
+
 # install dependencies, which is pretty much xpra
 install-ubuntu-dependencies:
 	codename=$(word 2, $(shell lsb_release --codename)) && \
