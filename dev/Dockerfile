@@ -5,7 +5,7 @@
 FROM ubuntu:14.04
 
 RUN apt-get update && \
-    apt-get install -y zsh openssh-server git gdebi wget x11-apps emacs software-properties-common
+    apt-get install -y zsh openssh-server git gdebi wget x11-apps emacs software-properties-common tree
 
 # install java
 RUN apt-add-repository ppa:webupd8team/java && \

@@ -3,7 +3,7 @@
 # This will be mostly clojure!
 #
 
-TAG=markmandel/wrapping-dev
+TAG=markmandel/clojure-dev
 NAME=clojure-project-shell
 PORT=8080
 
