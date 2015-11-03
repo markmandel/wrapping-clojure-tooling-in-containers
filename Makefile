@@ -26,6 +26,7 @@ src-clean:
 	-rm -r $(current_path)/test
 	-rm -r $(current_path)/target
 	-rm -r $(current_path)/resources
+	-rm -r $(current_path)/dev-resources
 	-rm $(current_path)/project.clj
 	-rm $(current_path)/README.md
 	cp $(current_path)/orig/.gitignore $(current_path)/.gitignore
