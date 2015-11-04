@@ -4,7 +4,7 @@
 #
 
 TAG=markmandel/clojure-dev
-NAME=clojure-project-shell
+NAME=wrapping-clojure-shell
 WEB_PORT=8080
 
 #Directory that this Makefile is in.
