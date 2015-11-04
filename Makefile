@@ -5,9 +5,9 @@
 
 TAG=markmandel/clojure-dev
 NAME=clojure-project-shell
-PORT=8080
+WEB_PORT=8080
 
-#current dir
+#Directory that this Makefile is in.
 mkfile_path := $(abspath $(lastword $(MAKEFILE_LIST)))
 current_path := $(dir $(mkfile_path))
 
@@ -19,18 +19,6 @@ docker-build:
 # Clean this docker image
 docker-clean:
 	-docker rmi $(TAG)
-
-# delete the generated code, and get things at a base place
-src-clean:
-	-rm -r $(current_path)/src/*
-	-rm -r $(current_path)/test
-	-rm -r $(current_path)/target
-	-rm -r $(current_path)/resources
-	-rm -r $(current_path)/dev-resources
-	-rm $(current_path)/project.clj
-	-rm $(current_path)/README.md
-	cp $(current_path)/orig/.gitignore $(current_path)/.gitignore
-	cp $(current_path)/orig/README-parent.md $(current_path)/README.md
 
 # Start a development shell
 shell:
@@ -51,18 +39,20 @@ shell:
 shell-attach:
 	docker exec -it -u=$(USER) $(NAME) /usr/bin/zsh
 
+# mount the docker's jvm in the /tmp dir
 shell-mount-jvm:
 	mkdir -p /tmp/$(NAME)/jvm
 	sshfs $(USER)@0.0.0.0:/usr/lib/jvm /tmp/$(NAME)/jvm -p $(call getPort,22) -o follow_symlinks
 
-# open a port forwarded port from Docker in Chrome!
+# open a port forwarded port from Docker in Chrome! (Defaults to 8080)
 chrome:
-	google-chrome http://localhost:$(call getPort,$(PORT))
+	google-chrome http://localhost:$(call getPort,$(WEB_PORT))
 
 # emacs
 emacs:
 	xpra start --ssh="ssh -p $(call getPort,22)" ssh:0.0.0.0:100 --start-child=emacs
 
+# if your connection disconnects, reconnect to your xpra session.
 emacs-attach:
 	xpra attach --ssh="ssh -p $(call getPort,22)" ssh:0.0.0.0:100
 
@@ -76,6 +66,17 @@ install-ubuntu-dependencies:
 	-sudo dpkg -i /tmp/xpra.deb
 	sudo apt-get install -f -y
 
+# delete the generated code, and get things at a base place
+src-clean:
+	-rm -r $(current_path)/src/*
+	-rm -r $(current_path)/test
+	-rm -r $(current_path)/target
+	-rm -r $(current_path)/resources
+	-rm -r $(current_path)/dev-resources
+	-rm $(current_path)/project.clj
+	-rm $(current_path)/README.md
+	cp $(current_path)/orig/.gitignore $(current_path)/.gitignore
+	cp $(current_path)/orig/README-parent.md $(current_path)/README.md
 
 # Functions
 
