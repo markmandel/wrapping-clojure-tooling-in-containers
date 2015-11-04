@@ -50,7 +50,8 @@ chrome:
 
 # emacs
 emacs:
-	xpra start --ssh="ssh -p $(call getPort,22)" ssh:0.0.0.0:100 --start-child=emacs
+	xpra start --ssh="ssh -p $(call getPort,22)" ssh:0.0.0.0:100 \
+	    --start-child=emacs --exit-with-children
 
 # if your connection disconnects, reconnect to your xpra session.
 emacs-attach:
