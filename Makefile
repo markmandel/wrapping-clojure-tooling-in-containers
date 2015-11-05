@@ -51,7 +51,7 @@ chrome:
 # emacs
 emacs:
 	xpra start --ssh="ssh -p $(call getPort,22)" ssh:0.0.0.0:100 \
-	    --start-child=emacs --exit-with-children
+	    --start-child=emacs --exit-with-children --encoding=png
 
 # if your connection disconnects, reconnect to your xpra session.
 emacs-attach:
@@ -62,7 +62,7 @@ install-ubuntu-dependencies:
 	codename=$(word 2, $(shell lsb_release --codename)) && \
 	echo Installing xpra debs for release: $$codename && \
 	wget -O /tmp/python-rencode.deb https://www.xpra.org/dists/$$codename/main/binary-amd64/python-rencode_1.0.3-1_amd64.deb && \
-	wget -O /tmp/xpra.deb https://www.xpra.org/dists/$$codename/main/binary-amd64/xpra_0.15.7-1_amd64.deb
+	wget -O /tmp/xpra.deb https://www.xpra.org/beta/trusty/main/binary-amd64/xpra_0.16.0-1_amd64.deb
 	sudo dpkg -i /tmp/python-rencode.deb
 	-sudo dpkg -i /tmp/xpra.deb
 	sudo apt-get install -f -y
