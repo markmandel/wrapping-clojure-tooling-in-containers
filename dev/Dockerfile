@@ -5,7 +5,8 @@
 FROM ubuntu:14.04
 
 RUN apt-get update && \
-    apt-get install -y zsh openssh-server git gdebi wget x11-apps emacs software-properties-common tree
+    apt-get install -y zsh openssh-server git gdebi wget x11-apps emacs software-properties-common \
+    tree xvfb xserver-xorg-core
 
 # install java
 RUN apt-add-repository ppa:webupd8team/java && \
@@ -28,7 +29,7 @@ RUN wget -O python-rencode.deb https://www.xpra.org/dists/trusty/main/binary-amd
     gdebi -n python-rencode.deb && \
     rm python-rencode.deb
 
-RUN wget -O xpra.deb https://www.xpra.org/beta/trusty/main/binary-amd64/xpra_0.16.0-1_amd64.deb && \
+RUN wget -O xpra.deb https://www.xpra.org/dists/trusty/main/binary-amd64/xpra_0.15.7-1_amd64.deb && \
     gdebi -n xpra.deb && \
     rm xpra.deb
 
