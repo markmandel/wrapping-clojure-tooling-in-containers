@@ -10,15 +10,15 @@ Provides `Make` targets for running the examples with the accompanying Docker co
 ### docker-build
 Builds the Clojure development Docker container for this project, installing on the required dependencies.
  
- docker-clean:
- shell:
- shell-attach:
- shell-mount-jvm:
- chrome:
- emacs:
- emacs-attach:
- install-ubuntu-dependencies:
- src-clean:
+### docker-clean
+### shell
+### shell-attach
+### shell-mount-jvm
+### chrome
+### emacs
+### emacs-attach
+### install-ubuntu-dependencies
+### src-clean
 
 
 
