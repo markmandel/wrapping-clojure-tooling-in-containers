@@ -51,7 +51,7 @@ chrome:
 # emacs
 emacs:
 	xpra start --ssh="ssh -p $(call getPort,22)" ssh:0.0.0.0:100 \
-	    --start-child=emacs --exit-with-children --encoding=png
+		--start-child=emacs --exit-with-children --encoding=png
 
 # if your connection disconnects, reconnect to your xpra session.
 emacs-attach:
@@ -67,17 +67,10 @@ install-ubuntu-dependencies:
 	-sudo dpkg -i /tmp/xpra.deb
 	sudo apt-get install -f -y
 
-# delete the generated code, and get things at a base place
-src-clean:
-	-rm -r $(current_path)/src/*
-	-rm -r $(current_path)/test
-	-rm -r $(current_path)/target
-	-rm -r $(current_path)/resources
-	-rm -r $(current_path)/dev-resources
-	-rm $(current_path)/project.clj
-	-rm $(current_path)/README.md
-	cp $(current_path)/orig/.gitignore $(current_path)/.gitignore
-	cp $(current_path)/orig/README-parent.md $(current_path)/README.md
+# Reset everything back to the original version (last git commit)
+src-reset:
+	git reset --hard
+	git clean -fd
 
 # Functions
 

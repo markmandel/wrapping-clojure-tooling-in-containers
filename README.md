@@ -5,6 +5,18 @@ Code demo for my talk "Wrapping Clojure Development Tooling in a Containers".
 
 Provides [Make](https://www.gnu.org/software/make/) targets for building and running the Clojure developer shell within the accompanying Docker container. 
 
+## Make Variables
+
+### TAG
+The tag to give the docker container. You may want to change this if you want to
+use this template for your own project
+
+### NAME
+The name of the container when it is running.
+
+### WEB_PORT
+The port your web application runs on inside the docker container.
+
 ## Make Targets
 
 ### docker-build
@@ -36,8 +48,8 @@ If you get disconnected from [Xpra](https://www.xpra.org/), this will reattach y
 ### install-ubuntu-dependencies
 Installs Xpra (version 0.15.7), assuming you are running Ubuntu.
 
-### src-clean
-Deletes any Clojure code, and brings everything back to the original template.
+### src-reset
+Reset everything back to the original version (last git commit)
 
 ## Licence
 

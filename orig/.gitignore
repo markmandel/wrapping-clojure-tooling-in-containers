@@ -1,7 +1,0 @@
-.*
-!.gitignore
-*.iml
-src
-test
-resources
-project.clj
