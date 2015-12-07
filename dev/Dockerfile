@@ -29,7 +29,7 @@ RUN wget -O python-rencode.deb https://www.xpra.org/dists/trusty/main/binary-amd
     gdebi -n python-rencode.deb && \
     rm python-rencode.deb
 
-RUN wget -O xpra.deb https://www.xpra.org/dists/trusty/main/binary-amd64/xpra_0.15.7-1_amd64.deb && \
+RUN wget -O xpra.deb https://www.xpra.org/dists/trusty/main/binary-amd64/xpra_0.15.9-1_amd64.deb && \
     gdebi -n xpra.deb && \
     rm xpra.deb
 
