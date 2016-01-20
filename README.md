@@ -5,6 +5,10 @@ Code demo for my talk "Wrapping Clojure Development Tooling in a Containers".
 
 Provides [Make](https://www.gnu.org/software/make/) targets for building and running the Clojure developer shell within the accompanying Docker container. 
 
+## Presentation
+
+[Blog post and see the recording of the presentation from Clojure/conj 2015.](http://www.compoundtheory.com/recording-wrapping-clojure-tooling-in-containers-part-2/)
+
 ## Make Variables
 
 ### TAG
